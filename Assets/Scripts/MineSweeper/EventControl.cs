@@ -77,7 +77,8 @@ public class EventControl : MonoBehaviour {
         }
         else
         {
-            if(!isGameEndOver){
+            if (!isGameEndOver)
+            {
                 OnGameEnd();
             }
         }

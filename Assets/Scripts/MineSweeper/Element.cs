@@ -36,58 +36,35 @@ public class Element : MonoBehaviour, IPointerDownHandler {
         }
 	}
 
-    void Start(){
-        //sr.size = new Vector2(0.5f, 0.5f);
-    }
-
-    // Update is called once per frame
-    void Update ()
+    public void OnPointerDown(PointerEventData peData)
     {
         if (ec.GetTimer() > 0 && ec.GetBugCount() < ec.maxMineCount)
         {
-            if (Input.GetMouseButtonUp(0) && !marked)
+            if (peData.pointerId == -1)
             {
-                mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                if (mousePosition.x > x - 0.5f && mousePosition.x < x + 0.5f && mousePosition.y > y - 0.5f && mousePosition.y < y + 0.5f)
-                {
-                    OnLeftMouseButtonClicked();
-                }
-            }
-            if (Input.GetMouseButtonUp(1) && IsCovered())
-            {
-                mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                if (mousePosition.x > x - 0.5f && mousePosition.x < x + 0.5f && mousePosition.y > y - 0.5f && mousePosition.y < y + 0.5f)
-                {
-                    OnRightMouseButtonClicked();
-                }
-            }
-        }
-    }
-
-    public void OnPointerDown(PointerEventData pointerEventData){
-        print(this.gameObject.name);
-        //if (ec.GetTimer() > 0 && ec.GetBugCount() < ec.maxMineCount)
-        //{
-            if(pointerEventData.button == PointerEventData.InputButton.Left){
                 OnLeftMouseButtonClicked();
             }
-            else if(pointerEventData.button == PointerEventData.InputButton.Right){
+            else if (peData.pointerId == -2)
+            {
                 OnRightMouseButtonClicked();
             }
-        //}
+        }
     }
 
     private void OnLeftMouseButtonClicked()
     {
-        if (mine)
+        if (mine && !marked)
         {
-            if (ec.GetTimer() > 0)
+            if(sr.sprite != mistakeTexture)
             {
-                ec.TimerModify(-2.0f);
+                if (ec.GetTimer() > 0)
+                {
+                    ec.TimerModify(-2.0f);
+                }
+                sr.sprite = mistakeTexture;
             }
-            sr.sprite = mistakeTexture;
         }
-        else
+        else if(!marked)
         {
             LoadTexture(GridControl.AdjacentMines(x, y));
 
