@@ -18,6 +18,7 @@ public class EventControl : MonoBehaviour {
     private float timer;
     private bool isGameEnd = false;
     private int resultParameter = 0;
+    private bool isGameEndOver = false;
 
     private GameObject endObject;
 
@@ -76,7 +77,9 @@ public class EventControl : MonoBehaviour {
         }
         else
         {
-            OnGameEnd();
+            if(!isGameEndOver){
+                OnGameEnd();
+            }
         }
 	}
 
@@ -88,6 +91,7 @@ public class EventControl : MonoBehaviour {
         SetResultParameter();
         endObject.SetActive(true);
         ModifyProgrammerParameter(resultParameter);
+        isGameEndOver = true;
     }
 
     private void SetResultParameter(){

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class Element : MonoBehaviour {
+public class Element : MonoBehaviour, IPointerDownHandler {
 
     public bool mine;
 
@@ -61,6 +62,19 @@ public class Element : MonoBehaviour {
                 }
             }
         }
+    }
+
+    public void OnPointerDown(PointerEventData pointerEventData){
+        print(this.gameObject.name);
+        //if (ec.GetTimer() > 0 && ec.GetBugCount() < ec.maxMineCount)
+        //{
+            if(pointerEventData.button == PointerEventData.InputButton.Left){
+                OnLeftMouseButtonClicked();
+            }
+            else if(pointerEventData.button == PointerEventData.InputButton.Right){
+                OnRightMouseButtonClicked();
+            }
+        //}
     }
 
     private void OnLeftMouseButtonClicked()
