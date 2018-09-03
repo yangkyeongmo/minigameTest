@@ -143,9 +143,9 @@ MonoBehaviour:
   timerStart: 10
   ctrl: {fileID: 114046017}
   endObject: {fileID: 463229412}
-  badBound: 15
-  normalBound: 25
-  goodBound: 35
+  badBound: 40
+  normalBound: 65
+  goodBound: 85
 --- !u!4 &114046019
 Transform:
   m_ObjectHideFlags: 0

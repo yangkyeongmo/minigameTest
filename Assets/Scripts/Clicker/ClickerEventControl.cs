@@ -15,6 +15,7 @@ public class ClickerEventControl : MonoBehaviour {
     private int count = 0;
     private int resultParameter = 0;
     private GameObject result;
+    private bool isGameEndOver = false;
 
     private Text timerText;
     private Text countText;
@@ -44,7 +45,10 @@ public class ClickerEventControl : MonoBehaviour {
         }
         if (gameEnd)
         {
-            OnGameEnd();
+            if (!isGameEndOver)
+            {
+                OnGameEnd();
+            }
         }
 	}
 
@@ -56,6 +60,7 @@ public class ClickerEventControl : MonoBehaviour {
         SetResultParameter();
         endObject.SetActive(true);
         DecreaseArtParameter(resultParameter);
+        isGameEndOver = true;
     }
 
     private void SetResultParameter(){
