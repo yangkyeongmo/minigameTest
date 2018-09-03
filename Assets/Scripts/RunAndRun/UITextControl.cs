@@ -11,7 +11,6 @@ public class UITextControl : MonoBehaviour {
     public Text timerText;
     public Text runMeterText;
     public Text timerDecreaseText;
-    public GameObject onHitText;
 
     private GameControl gc;
     private Character ch;
@@ -57,7 +56,6 @@ public class UITextControl : MonoBehaviour {
     {
         isCreatedText = true;
         Instantiate(timerDecreaseText, new Vector3(timerText.transform.position.x - 20.0f, timerText.transform.position.y, 0.0f), Quaternion.identity).rectTransform.SetParent(GameObject.Find("UICanvas").transform);
-        Instantiate(onHitText, canvasRect.rect.center +  new Vector2(765.0f, 322.0f), Quaternion.identity).transform.SetParent(GameObject.Find("UICanvas").transform);
     }
 
     public bool GetIsCreatedText()
