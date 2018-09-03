@@ -49,9 +49,23 @@ public class CharacterPhysics : MonoBehaviour {
         rb.velocity = new Vector2(0, 1.0f) * jumpFactor;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.transform.CompareTag("Enemy"))
+        {
+            collidedTerrain = collision.gameObject;
+            if (!character.GetIsInvincible())
+            {
+                print("is Hit");
+                gc.ModifyTimer(-1.0f);
+                character.isHit = true;
+            }
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.CompareTag("Enemy") || collision.transform.CompareTag("Terrain"))
+        if (collision.transform.CompareTag("Terrain"))
         {
             collidedTerrain = collision.gameObject;
             if (!character.GetIsInvincible())
@@ -65,18 +79,19 @@ public class CharacterPhysics : MonoBehaviour {
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.transform.CompareTag("Ground") || collision.transform.CompareTag("Enemy"))
+        if (collision.transform.CompareTag("Ground"))
         {
             isOnGround = true;
         }
-        if(collision.transform.CompareTag("Terrain")){
+        if (collision.transform.CompareTag("Terrain"))
+        {
             isCharacterStopped = true;
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if(collision.transform.CompareTag("Ground") || collision.transform.CompareTag("Enemy"))
+        if(collision.transform.CompareTag("Ground"))
         {
             isOnGround = false;
             collidedTerrain = null;

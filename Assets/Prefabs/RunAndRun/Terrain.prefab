@@ -191,6 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c95b535896921f24b9efa9dbdc0c6903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveFactor: 9
   xDestroyBoundary: -15
   probSpawn: 3
   probStaticOrReactive: 3

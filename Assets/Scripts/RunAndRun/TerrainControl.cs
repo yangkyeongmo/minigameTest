@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class TerrainControl : MonoBehaviour {
 
-    public static float moveSpeed = -0.15f;
+    public static float moveSpeed;
 
+    public float moveFactor;
     public float xDestroyBoundary;
     public float probSpawn, probStaticOrReactive;
     public GameObject[] obstacle;
@@ -17,6 +18,7 @@ public class TerrainControl : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        moveSpeed = -moveFactor * Time.fixedDeltaTime;
         characterSprite = GameObject.Find("Character").transform.Find("Sprite").gameObject;
         toc = GameObject.Find("GameControl").GetComponent<TerrainOverlapControl>();
         c2 = transform.Find("CollideBox").GetComponent<Collider2D>();
