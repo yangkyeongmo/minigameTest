@@ -48,6 +48,10 @@ public class Element : MonoBehaviour, IPointerDownHandler {
             {
                 OnRightMouseButtonClicked();
             }
+            if (GridControl.IsFinished())
+            {
+                ec.SetGameEnd(true);
+            }
         }
     }
 
@@ -62,6 +66,7 @@ public class Element : MonoBehaviour, IPointerDownHandler {
                     ec.TimerModify(-2.0f);
                 }
                 sr.sprite = mistakeTexture;
+                ec.BugCountUp();
             }
         }
         else if(!marked)
@@ -79,25 +84,27 @@ public class Element : MonoBehaviour, IPointerDownHandler {
 
     private void OnRightMouseButtonClicked()
     {
-        if (!marked)
+        if(sr.sprite != mistakeTexture)
         {
-            if (mine)
+            if (!marked)
             {
-                ec.BugCountUp();
+                if (mine)
+                {
+                    ec.BugCountUp();
+                }
+                sr.sprite = markTexture;
+                marked = true;
             }
-            sr.sprite = markTexture;
-            marked = true;
-        }
-        else
-        {
-            if (mine)
+            else
             {
-                ec.BugCountDown();
+                if (mine)
+                {
+                    ec.BugCountDown();
+                }
+                sr.sprite = defaultTexture;
+                marked = false;
             }
-            sr.sprite = defaultTexture;
-            marked = false;
         }
-        
     }
 
     public void LoadTexture(int adjacentCount)
@@ -114,6 +121,6 @@ public class Element : MonoBehaviour, IPointerDownHandler {
 
     public bool IsCovered()
     {
-        return GetComponent<SpriteRenderer>().sprite.name == "mine_button" || GetComponent<SpriteRenderer>().sprite.name == "mine_check";
+        return GetComponent<SpriteRenderer>().sprite.name == "mine_button";
     }
 }

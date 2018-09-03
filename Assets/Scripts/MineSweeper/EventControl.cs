@@ -71,9 +71,16 @@ public class EventControl : MonoBehaviour {
     void Update () {
         timerText.text = timer.ToString("N2") + "초";
         bugCountText.text = "BUGS: " + bugCount.ToString() + "/" + maxMineCount.ToString();
-		if(timer > 0 && !isGameEnd)
+        if (!isGameEnd)
         {
-            timer -= Time.deltaTime;
+            if (timer > 0)
+            {
+                timer -= Time.deltaTime;
+            }
+            if(bugCount == maxMineCount || timer < 0)
+            {
+                isGameEnd = true;
+            }
         }
         else
         {
@@ -145,5 +152,10 @@ public class EventControl : MonoBehaviour {
     public int GetBugCount()
     {
         return bugCount;
+    }
+
+    public void SetGameEnd(bool b)
+    {
+        isGameEnd = b;
     }
 }
