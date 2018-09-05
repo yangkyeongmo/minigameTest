@@ -37,10 +37,10 @@ public class UITextControl : MonoBehaviour {
             runmeter += Time.deltaTime * runSpeedByMeterPerSec;
         }
         debugText.text = Time.time.ToString();
-        timerText.text = "TIMER: " + timer.ToString("N2");
+        timerText.text = ((int)timer).ToString() + ":" + ((int)((timer % 1) * 100)).ToString();
         if (timer > 0)
         {
-            runMeterText.text = "RUN: " + runmeter.ToString("N2") + "m";
+            runMeterText.text = runmeter.ToString("N2") + "m";
         }
         if (ch.isHit && !isCreatedText)
         {
