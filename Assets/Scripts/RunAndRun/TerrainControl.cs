@@ -51,22 +51,22 @@ public class TerrainControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (!GameControl.isGameEnd)
+        if (!GameControl.isGameEnd && GameControl.isGameStart)
         {
             if (toc.GetIsTerrainMoveAvailable())
             {
                 Move();
             }
         }
-        if(transform.position.y + c2.bounds.size.y/2 > characterSprite.transform.position.y - 0.9f && transform.position.y - c2.bounds.size.y/2 < characterSprite.transform.position.y + 0.9f)
+        if (transform.position.y + c2.bounds.size.y / 2 > characterSprite.transform.position.y - 0.9f && transform.position.y - c2.bounds.size.y / 2 < characterSprite.transform.position.y + 0.9f)
         {
-            if (transform.position.x - c2.bounds.size.x / 2 < characterSprite.transform.position.x + 0.9f && transform.position.x - c2.bounds.size.x/2 > characterSprite.transform.position.x -0.9f)
+            if (transform.position.x - c2.bounds.size.x / 2 < characterSprite.transform.position.x + 0.9f && transform.position.x - c2.bounds.size.x / 2 > characterSprite.transform.position.x - 0.9f)
             {
                 toc.SetIsTerrainOverlapped(true);
                 toc.SetOverlapDistance((characterSprite.transform.position.x + 0.9f) - (transform.position.x - c2.bounds.size.x / 2));
             }
         }
-        if(transform.position.x < xDestroyBoundary + characterSprite.transform.position.x)
+        if (transform.position.x < xDestroyBoundary + characterSprite.transform.position.x)
         {
             toc.DeleteElementOnSpawnedList(gameObject);
             Destroy(gameObject);

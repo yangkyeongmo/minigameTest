@@ -19,7 +19,7 @@ public class TerrainSpawnControl : MonoBehaviour {
     }
 
     private void Update(){
-        if(!GameControl.isGameEnd){
+        if(!GameControl.isGameEnd && GameControl.isGameStart){
             SpawnTerrainWithTimeInterval();
         }
     }

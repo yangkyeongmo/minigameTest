@@ -27,7 +27,7 @@ public class CharacterPhysics : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         transform.rotation = startQuat;
-        if (!GameControl.isGameEnd)
+        if (!GameControl.isGameEnd && GameControl.isGameStart)
         {
             if (isOnGround)
             {

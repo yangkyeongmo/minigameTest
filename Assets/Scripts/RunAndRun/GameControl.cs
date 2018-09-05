@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GameControl : MonoBehaviour {
 
     public static bool isGameEnd = false;
+    public static bool isGameStart = false;
 
     public float timerStart;
     public GameObject endObject;
@@ -22,13 +23,16 @@ public class GameControl : MonoBehaviour {
 
     private void Update()
     {
-        if(timer > 0)
+        if (isGameStart)
         {
-            OnGameNotEnd();
-        }
-        else 
-        {
-            OnGameEnd();
+            if (timer > 0)
+            {
+                OnGameNotEnd();
+            }
+            else
+            {
+                OnGameEnd();
+            }
         }
     }
 
