@@ -66,7 +66,7 @@ public class Element : MonoBehaviour, IPointerDownHandler {
                     ec.TimerModify(-2.0f);
                 }
                 sr.sprite = mistakeTexture;
-                ec.BugCountUp();
+                ec.ClickedBugCountUp();
             }
         }
         else if(!marked)
@@ -91,6 +91,7 @@ public class Element : MonoBehaviour, IPointerDownHandler {
                 if (mine)
                 {
                     ec.BugCountUp();
+                    ec.ClickedBugCountUp();
                 }
                 sr.sprite = markTexture;
                 marked = true;
@@ -100,6 +101,7 @@ public class Element : MonoBehaviour, IPointerDownHandler {
                 if (mine)
                 {
                     ec.BugCountDown();
+                    ec.ClickedBugCountDown();
                 }
                 sr.sprite = defaultTexture;
                 marked = false;

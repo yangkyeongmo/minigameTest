@@ -19,6 +19,7 @@ public class EventControl : MonoBehaviour {
     private Element[,] elements;
     private int mineCount = 0;
     private int bugCount = 0;
+    private int clickedBugCount = 0;
     private float timer;
     private int resultParameter = 0;
     private bool isGameEndOver = false;
@@ -76,7 +77,7 @@ public class EventControl : MonoBehaviour {
             {
                 timer -= Time.deltaTime;
             }
-            if(bugCount == maxMineCount || timer < 0)
+            if(bugCount == maxMineCount || timer < 0 || clickedBugCount == maxMineCount)
             {
                 isGameEnd = true;
             }
@@ -102,7 +103,7 @@ public class EventControl : MonoBehaviour {
     }
 
     private void SetResultParameter(){
-        if(bugCount > 0){
+        if(bugCount >= 0){
             if(bugCount <= badBound){
                 SetResult("BAD", +3);
             }
@@ -147,6 +148,16 @@ public class EventControl : MonoBehaviour {
     {
         bugCount--;
     } 
+
+    public void ClickedBugCountUp()
+    {
+        clickedBugCount++;
+    }
+
+    public void ClickedBugCountDown()
+    {
+        clickedBugCount--;
+    }
 
     public int GetBugCount()
     {
