@@ -5,12 +5,14 @@ using UnityEngine.UI;
 
 public class ClickerEventControl : MonoBehaviour {
 
+    public static bool isGameEnd = false;
+    public static bool isGameStart = false;
+
     public float timerStart;
     public GameObject ctrl;
     public GameObject endObject;
     public float badBound, normalBound, goodBound;
-
-    private bool gameEnd = false;
+    
     private float timer;
     private int count = 0;
     private int resultParameter = 0;
@@ -25,29 +27,34 @@ public class ClickerEventControl : MonoBehaviour {
 	void Start () {
         timer = timerStart;
         timerText = GameObject.Find("TimerText").GetComponent<Text>();
+        timerText.text = "10.00초";
         countText = GameObject.Find("CountText").GetComponent<Text>();
+        countText.text = "HITS: ";
         result = endObject.transform.Find("Result").gameObject;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        timerText.text = timer.ToString("N2") + "초";
-        countText.text = "HITS: " + count.ToString();
+        if (isGameStart)
+        {
+            timerText.text = timer.ToString("N2") + "초";
+            countText.text = "HITS: " + count.ToString();
 
-		if(timer > 0 && !gameEnd)
-        {
-            timer -= Time.deltaTime;
-        }
-        else if(timer <= 0)
-        {
-            timer = 0;
-            gameEnd = true;
-        }
-        if (gameEnd)
-        {
-            if (!isGameEndOver)
+            if (timer > 0 && !isGameEnd)
             {
-                OnGameEnd();
+                timer -= Time.deltaTime;
+            }
+            else if (timer <= 0)
+            {
+                timer = 0;
+                isGameEnd = true;
+            }
+            if (isGameEnd)
+            {
+                if (!isGameEndOver)
+                {
+                    OnGameEnd();
+                }
             }
         }
 	}
