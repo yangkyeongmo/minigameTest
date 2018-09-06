@@ -5,28 +5,27 @@ using UnityEngine.UI;
 
 public class EventControl : MonoBehaviour {
 
+    public static bool isGameStart = false;
+    public static bool isGameEnd = false;
+
     public int maxMineCount, badBound, normalBound, goodBound;
     public float timerStart;
 
     public static Element[,] mineElements;
     public Text timerText;
     public Text bugCountText;
+    public GameObject endObject;
 
     private Element[,] elements;
     private int mineCount = 0;
     private int bugCount = 0;
     private float timer;
-    private bool isGameEnd = false;
     private int resultParameter = 0;
     private bool isGameEndOver = false;
-
-    private GameObject endObject;
 
 	// Use this for initialization
 	void Start () {
         timer = timerStart;
-        endObject = GameObject.Find("GameEnd");
-        endObject.SetActive(false);
         elements = GridControl.elements;
         if(mineCount != maxMineCount)
         {
@@ -71,7 +70,7 @@ public class EventControl : MonoBehaviour {
     void Update () {
         timerText.text = timer.ToString("N2") + "초";
         bugCountText.text = "BUGS: " + bugCount.ToString() + "/" + maxMineCount.ToString();
-        if (!isGameEnd)
+        if (!isGameEnd && isGameStart)
         {
             if (timer > 0)
             {
@@ -82,7 +81,7 @@ public class EventControl : MonoBehaviour {
                 isGameEnd = true;
             }
         }
-        else
+        else if(isGameEnd)
         {
             if (!isGameEndOver)
             {
@@ -152,10 +151,5 @@ public class EventControl : MonoBehaviour {
     public int GetBugCount()
     {
         return bugCount;
-    }
-
-    public void SetGameEnd(bool b)
-    {
-        isGameEnd = b;
     }
 }

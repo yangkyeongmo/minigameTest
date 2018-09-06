@@ -50,7 +50,7 @@ public class Element : MonoBehaviour, IPointerDownHandler {
             }
             if (GridControl.IsFinished())
             {
-                ec.SetGameEnd(true);
+                EventControl.isGameEnd = true;
             }
         }
     }
